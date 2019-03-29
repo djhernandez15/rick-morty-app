@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      characters: []
+    }
+  }
+
+  componentDidMount(){
+    axios
+    .get('https://rickandmortyapi.com/api/character')
+    .then(response => {
+      this.setState({characters: response.data.results})
+    })
+  }
+
   render() {
+    let characters = this.state.characters.map((character) => {
+      return <div>
+        <img src={character.image}></img>
+        <h1>{character.name}</h1>
+        <h2>{character.species}</h2>
+      </div>
+    })
+    
+    
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {characters}
       </div>
     );
   }
