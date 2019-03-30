@@ -24,6 +24,10 @@ class App extends Component {
         <img src={character.image}></img>
         <h1>{character.name}</h1>
         <h2>{character.species}</h2>
+        <h2>{character.gender}</h2>
+        <h2>{character.status}</h2>
+        <h2>{character.origin.name}</h2>
+        <h2>{character.location.name}</h2>
       </div>
     })
     
